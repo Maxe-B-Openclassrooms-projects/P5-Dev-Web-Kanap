@@ -1,5 +1,5 @@
 async function displayData() {
-  
+
   const listData = await api.fetchProducts();
 
   for (Product of listData) {
@@ -18,7 +18,7 @@ displayData();
 
 function displayArticle(product) {
 
- 
+
   let href = document.createElement('a');
 
   let article = document.createElement('article');
