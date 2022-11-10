@@ -19,7 +19,8 @@ displayData();
 function displayArticle(product) {
 
 
-  let href = document.createElement('a');
+  let link = document.createElement('a');
+  link.href = `./product.html?id=${product._id}`;
 
   let article = document.createElement('article');
 
@@ -36,15 +37,14 @@ function displayArticle(product) {
   p.textContent = product.description
 
   let section = document.getElementById('items');
-  items.getElementById = product._id
 
   // lié les éléments entre eux
   article.append(img, h3, p)
 
-  href.append(article);
+  link.append(article);
 
 
-  section.appendChild(href);
+  section.appendChild(link);
 
 
 }
