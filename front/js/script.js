@@ -17,10 +17,16 @@ displayData();
 
 
 function displayArticle(product) {
+<<<<<<< Updated upstream
 
 
   let link = document.createElement('a');
   link.href = `./product.html?id=${product._id}`;
+=======
+console.log(product);
+ 
+  let href = document.createElement('a');
+>>>>>>> Stashed changes
 
   let article = document.createElement('article');
 
