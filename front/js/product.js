@@ -10,7 +10,7 @@ api.fetchProduct(id).then(product => {
   // TODO BINder product sur la page
 });
 
-
+selecteurqueeryy = innerthmtl
 
 
 
