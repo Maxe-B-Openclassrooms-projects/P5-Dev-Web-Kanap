@@ -4,31 +4,70 @@
   return url.get(`id`);
 }
 const id = getProductId();
-api.fetchProduct(id).then(product => { 
-  
+api.fetchProduct(id).then(product => {
+
     document.querySelector('#price').innerHTML = product.price;
     document.querySelector('#description').innerHTML = product.description;
-  
+
     const options = product.colors.map(color => `<option value="${color}">${color}</option>`).join();
     document.querySelector('#colors').innerHTML =`<option value="">--SVP, choisissez une couleur --</option>${options}`;
-  
+
 });
 
-const formToValue = function() {
-   const color =  document.querySelector('#colors').value;
-   const quantity = document.querySelector('#quantity').value;
-   const order = {id, color, quantity};
-   localStorage.setItem('cart', JSON.stringify(order));
+const getMyCart = () => {
+  try {
+    const cart = JSON.parse(localStorage.getItem("cart"));
+
+    if (Array.isArray(cart)) {
+      return cart
+    }
+  } catch (err) {
+  }
+
+  return [];
 }
+
+const itemSearcher = order => item => item.id === order.id && item.color === order.color;
+
+const upSertItem = (cart, order) => {
+  const idx = cart.findIndex(itemSearcher(order), cart);
+
+  // Create
+  if (idx < 0) {
+    cart.push(order);
+
+    return cart;
+  }
+
+  // Update
+  cart[idx].quantity = order.quantity;
+
+  return cart;
+}
+
+
+const formToValue = () => {
+  const color = document.querySelector('#colors').value;
+  const quantity = document.querySelector('#quantity').value;
+  const order = { id, color, quantity };
+  const cart = getMyCart();
+
+  localStorage.setItem('cart', JSON.stringify(
+    upSertItem(cart, order)
+  ));
+}
+
+// https://www.youtube.com/watch?v=vMT4NNFYno0
+
 
 
 // function diplayProduct() {
 //   let cloneProduct = document.querySelector('#item').content.cloneNode(true);
 //   let newProduct = cloneProduct.querySelector('#item');
-  
- 
+
+
 //   console.log(newProduct);
-  
+
 
 
 // };
